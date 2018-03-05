@@ -29,12 +29,13 @@ func Provider() terraform.ResourceProvider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"cloudflare_record":                resourceCloudFlareRecord(),
-			"cloudflare_load_balancer":         resourceCloudFlareLoadBalancer(),
-			"cloudflare_load_balancer_pool":    resourceCloudFlareLoadBalancerPool(),
-			"cloudflare_load_balancer_monitor": resourceCloudFlareLoadBalancerMonitor(),
-			"cloudflare_page_rule":             resourceCloudFlarePageRule(),
-			"cloudflare_rate_limit":            resourceCloudFlareRateLimit(),
+			"cloudflare_record":                 resourceCloudFlareRecord(),
+			"cloudflare_load_balancer":          resourceCloudFlareLoadBalancer(),
+			"cloudflare_load_balancer_pool":     resourceCloudFlareLoadBalancerPool(),
+			"cloudflare_load_balancer_monitor":  resourceCloudFlareLoadBalancerMonitor(),
+			"cloudflare_page_rule":              resourceCloudFlarePageRule(),
+			"cloudflare_rate_limit":             resourceCloudFlareRateLimit(),
+			"cloudflare_zone_settings_override": resourceCloudFlareZoneSettingsOverride(),
 		},
 
 		ConfigureFunc: providerConfigure,
