@@ -34,6 +34,7 @@ func Provider() terraform.ResourceProvider {
 			"cloudflare_load_balancer_pool":    resourceCloudFlareLoadBalancerPool(),
 			"cloudflare_load_balancer_monitor": resourceCloudFlareLoadBalancerMonitor(),
 			"cloudflare_page_rule":             resourceCloudFlarePageRule(),
+			"cloudflare_rate_limit":            resourceCloudFlareRateLimit(),
 		},
 
 		ConfigureFunc: providerConfigure,
