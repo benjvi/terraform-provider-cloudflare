@@ -4,7 +4,12 @@ import (
 	"fmt"
 	"net"
 	"strings"
+
+	"github.com/hashicorp/terraform/helper/schema"
 )
+
+var allowedHTTPMethods = []string{"GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "_ALL_"}
+var allowedSchemes = []string{"HTTP", "HTTPS", "_ALL_"}
 
 // validateRecordType ensures that the cloudflare record type is valid
 func validateRecordType(t string, proxied bool) error {
@@ -78,4 +83,26 @@ func validateRecordName(t string, value string) error {
 	}
 
 	return nil
+}
+
+// validateIntInSlice returns a SchemaValidateFunc which tests if the provided value
+// is of type int
+func validateIntInSlice(valid []int) schema.SchemaValidateFunc {
+	return func(i interface{}, k string) ([]string, []error) {
+		var es []error
+		v, ok := i.(int)
+		if !ok {
+			es = append(es, fmt.Errorf("expected type of %q to be int", k))
+			return nil, es
+		}
+
+		for _, str := range valid {
+			if v == str {
+				return nil, nil
+			}
+		}
+
+		es = append(es, fmt.Errorf("expected %q to be one of %v, got %d", k, valid, v))
+		return nil, es
+	}
 }
